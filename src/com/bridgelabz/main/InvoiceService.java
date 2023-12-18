@@ -3,7 +3,7 @@ package com.bridgelabz.main;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.brudgelabz.test.Ride;
+import com.bridgelabz.test.Ride;
 
 public class InvoiceService {
 
@@ -29,6 +29,25 @@ public class InvoiceService {
 	public double calculateFare(double distance, int time) {
 		double fare = distance * MINIMUM_FARE_PER_KM + time * MINIMUM_FARE_PER_MINUTE;
 		return Math.max(fare, MINIMUM_FARE);
+	}
+	
+
+	// <-----------------------USE CASE 2-------------------------->
+	/**
+	 * Calculates the total fare for multiple rides.
+	 *
+	 * @desc This method takes an array of Ride objects and calculates the total
+	 *       fare for all rides.
+	 * @param rides An array of Ride objects, each representing a ride with distance
+	 *              and time.
+	 * @return The total fare for all rides.
+	 */
+	public double calculateMultipleRideFair(Ride[] rides) {
+		double fare = 0.0;
+		for (Ride ride : rides) {
+			fare += calculateFare(ride.distance, ride.time);
+		}
+		return fare;
 	}
 
 }
