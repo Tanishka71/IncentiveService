@@ -59,4 +59,19 @@ class InvoiceServiceTest {
 		double fare = invoice.calculateMultipleRideFair(rides);
 		Assert.assertEquals(105, fare, 0.0);
 	}
+	
+	@Test
+	// @desc: Test to check the InvoiceSummary for multiple rides.
+	// @params: Array of Ride objects
+	// @return: None
+
+	void givenMultipleDistanceAndTimeCheckSummary() {
+		InvoiceService invoice = new InvoiceService();
+		Ride[] rides = { new Ride(5.0, 10), new Ride(5.0, 10) };
+		InvoiceSummary summary = invoice.calculateMultipleRideFairReturnSummary(rides);
+		InvoiceSummary expectedSummary = new InvoiceSummary(2, 120.0, 60.0);
+
+		Assert.assertEquals(summary.toString(), expectedSummary.toString());
+	}
+
 }

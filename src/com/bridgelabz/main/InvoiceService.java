@@ -49,5 +49,23 @@ public class InvoiceService {
 		}
 		return fare;
 	}
+	
+
+	// <-----------------------USE CASE 3-------------------------->
+	/**
+	 * Calculates the total fare and average fare per ride for multiple rides and
+	 * returns an InvoiceSummary.
+	 *
+	 * @desc This method takes an array of Ride objects and calculates the total
+	 *       fare and average fare per ride.
+	 * @param rides An array of Ride objects, each representing a ride with distance
+	 *              and time.
+	 * @return An InvoiceSummary object containing the total number of rides, total
+	 *         fare, and average fare per ride.
+	 */
+	public InvoiceSummary calculateMultipleRideFairReturnSummary(Ride[] rides) {
+		double totalFare = calculateMultipleRideFair(rides);
+		return new InvoiceSummary(rides.length, totalFare, (totalFare / rides.length));
+	}
 
 }
