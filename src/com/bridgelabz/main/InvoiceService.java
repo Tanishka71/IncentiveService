@@ -67,5 +67,27 @@ public class InvoiceService {
 		double totalFare = calculateMultipleRideFair(rides);
 		return new InvoiceSummary(rides.length, totalFare, (totalFare / rides.length));
 	}
+	
+	// <-----------------------USE CASE 4-------------------------->
+		/**
+		 * Calculates and stores the fare for each ride in a map with distance as the
+		 * key and fare as the value.
+		 *
+		 * @desc This method takes a user ID and an array of Ride objects, calculates
+		 *       the fare for each ride, and stores it in a map.
+		 * @param userId The user ID associated with the rides.
+		 * @param rides  An array of Ride objects, each representing a ride with
+		 *               distance and time.
+		 * @return A map containing the distance as the key and fare as the value for
+		 *         each ride.
+		 */
+		public Map<Double, Double> calculateRideInvoice(String userId, Ride[] rides) {
+			for (Ride ride : rides) {
+				double fare = calculateFare(ride.distance, ride.time);
+				invoiceService.put(ride.distance, fare);
+			}
+			return invoiceService;
+		}
+		
 
 }

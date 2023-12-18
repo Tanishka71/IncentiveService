@@ -73,5 +73,18 @@ class InvoiceServiceTest {
 
 		Assert.assertEquals(summary.toString(), expectedSummary.toString());
 	}
+	
+
+	@Test
+	// @desc: Test to check the total fare for multiple rides.
+	// @params: Array of Ride objects
+	// @return: None
+
+	void givenMultipleDistanceAndTimeCheckTotalFare() {
+		InvoiceService invoice = new InvoiceService();
+		Ride[] rides = { new Ride(2.0, 5), new Ride(5.0, 10), new Ride(1.0, 10) };
+		double fare = invoice.calculateMultipleRideFair(rides);
+		Assert.assertEquals(105, fare, 0.0);
+	}
 
 }
