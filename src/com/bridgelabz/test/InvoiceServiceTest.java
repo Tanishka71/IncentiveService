@@ -76,15 +76,34 @@ class InvoiceServiceTest {
 	
 
 	@Test
-	// @desc: Test to check the total fare for multiple rides.
-	// @params: Array of Ride objects
+	// @desc: Test to check the generation of ride and invoice details for a
+	// specific user.
+	// @params: User ID (String), Array of Ride objects
 	// @return: None
 
-	void givenMultipleDistanceAndTimeCheckTotalFare() {
-		InvoiceService invoice = new InvoiceService();
-		Ride[] rides = { new Ride(2.0, 5), new Ride(5.0, 10), new Ride(1.0, 10) };
-		double fare = invoice.calculateMultipleRideFair(rides);
-		Assert.assertEquals(105, fare, 0.0);
+	void givenUserIdReturnRideAndInvoice() {
+		String userId = "Tanishka";
+		Ride[] rides = { new Ride(5.0, 10), new Ride(1.0, 10) };
+		Map<Double, Double> actual = invoice.calculateRideInvoice(userId, rides);
+		Map<Double, Double> expectedSummary = new HashMap<>();
+		expectedSummary.put(5.0, 60.0);
+		expectedSummary.put(1.0, 20.0);
+		Assert.assertTrue(actual.equals(expectedSummary));
 	}
+	
+	@Test
+	// @desc: Test to check the calculation of fare for premium rides based on
+	// distance and time.
+	// @params: Distance (double), Time (int)
+	// @return: None
+
+	void givenDistanceAndTimeCheckPremiumRideFare() {
+		double distance = 1.0;
+		int time = 10;
+		double premiumFare = invoice.calculatePremiumRideFare(distance, time);
+		Assert.assertEquals(35.0, premiumFare, 0.0);
+	}
+
+
 
 }

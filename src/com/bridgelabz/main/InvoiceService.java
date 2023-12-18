@@ -12,6 +12,9 @@ public class InvoiceService {
 	private static final double MINIMUM_FARE = 5;
 	
 
+    private static final double PREMIUM_FARE_PER_KM = 15;
+    private static final int PREMIUM_FARE_PER_MINUTE = 2;
+    private static final double PREMIUM_MINIMUM_FARE = 20;
     
 	Map<Double, Double> invoiceService = new HashMap<>();
 
@@ -89,5 +92,20 @@ public class InvoiceService {
 			return invoiceService;
 		}
 		
+		
+
+	    //<-----------------------USE CASE 5 (Premium Rides)-------------------------->
+		/*
+		 * @desc:Calculates the fare for a premium ride based on distance and time.
+		 * @param distance The distance traveled in kilometers.
+		 * @param time The time traveled in minutes.
+		 * @return The calculated fare for the premium ride, ensuring it is not below
+		 * the minimum fare.
+		 */
+	    public double calculatePremiumRideFare(double distance, int time) {
+	        double fare = distance * PREMIUM_FARE_PER_KM + time * PREMIUM_FARE_PER_MINUTE;
+	        return Math.max(fare, PREMIUM_MINIMUM_FARE);
+	    }
+
 
 }
